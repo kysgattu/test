@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Confirmation</title>
+</head>
+<body>
+  <h1>Confirm Sending</h1>
+  <p>Not all recipients have the same domain. Are you sure you want to send this email?</p>
+  <button id="yesButton">Yes</button>
+  <button id="noButton">No</button>
+  <script>
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+
+    yesButton.addEventListener('click', () => {
+      fetch('/send', { method: 'POST' })
+        .then(response => response.text())
+        .then(data => window.close()); // Close window on confirmation
+    });
+
+    noButton.addEventListener('click', () => {
+      fetch('/cancel', { method: 'POST' })
+      .then(response => response.text())
+      .then(data => window.close()); // Close window on cancellation
+    });
+  </script>
+</body>
+</html>
